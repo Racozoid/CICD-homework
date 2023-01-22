@@ -3,13 +3,15 @@
 
 pipeline {
     agent any
-
+    enviroment {
+        DOCKER_PASSWORD = credentials('dockerhub_login')
+    }
+	
     stages {
         stage("docker login") {
 			steps {
 			    echo "---------- docker login ----------"
-                withCredentials([usernamePassword(credentialsId: 'dockerhub_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    bat 'docker login -u $USERNAME -p $PASSWORD'
+                bat 'echo $DOCKER_PASSWORD_PSW | docker login -u DOCKER_PASSWORD_USR --pasword-stdin'
                 }
 			}
         }
