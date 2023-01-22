@@ -3,18 +3,6 @@
 
 pipeline {
     agent any
-    environment {
-        DOCKER_PASSWORD = credentials('dockerhub_login')
-    }
-	
-    stages {
-        stage("docker login") {
-			steps {
-			    echo "---------- docker login ----------"
-                bat 'echo $DOCKER_PASSWORD_PSW | docker login -u DOCKER_PASSWORD_USR --pasword-stdin'
-                }
-			}
-        }
         
         stage("create docker image") {
 			steps {
@@ -23,12 +11,4 @@ pipeline {
 			}
         }
         
-        stage("docker push") {
-            steps {
-                echo " ============== start pushing image =================="
-                bat 'docker push racozoid/ci-cd-homework:latest'
-               
-            }
-        }
-    }
 }
