@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage("create docker image") {
             echo "--------------------start building--------------------"
-            sh 'docker build -t racozoid/ci-cd-homework.'
+            bat 'docker build -t racozoid/ci-cd-homework.'
         }
     }
 }
