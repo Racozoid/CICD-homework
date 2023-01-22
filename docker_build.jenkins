@@ -3,12 +3,15 @@
 
 pipeline {
     agent any
-        
+
+    options {
+        timestamps()
+    }
+
+    stages {
         stage("create docker image") {
-			steps {
-		        echo "---------- start building image ----------"
-                bat 'docker build -t racozoid/ci-cd-homework:latest .'
-			}
+            echo "--------------------start building--------------------"
+            sh 'docker build -t racozoid/ci-cd-homework.'
         }
-        
+    }
 }
