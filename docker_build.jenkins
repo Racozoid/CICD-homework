@@ -5,11 +5,28 @@ pipeline {
     agent any
 
     stages {
+        stage("docker login") {
+			steps {
+			    echo "---------- docker login ----------"
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    bat 'docker login -u $USERNAME -p $PASSWORD'
+                }
+			}
+        }
+        
         stage("create docker image") {
 			steps {
-				echo "---------- start building image ----------"
-            			bat 'docker build .'
+		        echo "---------- start building image ----------"
+                bat 'docker build racozoid/ci-cd-homework:latest .'
 			}
+        }
+        
+        stage("docker push") {
+            steps {
+                echo " ============== start pushing image =================="
+                bat 'docker push racozoid/ci-cd-homework:latest'
+               
+            }
         }
     }
 }
