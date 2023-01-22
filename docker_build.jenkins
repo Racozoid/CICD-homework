@@ -1,13 +1,8 @@
 #!groovy
 // Run docker build
-properties([disableConcurrentBuilds()])
 
 pipeline {
     agent any
-
-    options {
-        timestamps()
-    }
 
     stages {
         stage("create docker image") {
