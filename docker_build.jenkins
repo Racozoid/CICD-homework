@@ -12,7 +12,7 @@ pipeline {
         stage("create docker image") {
             steps {
                 echo "--------------------start building--------------------"
-                bat 'docker build -t racozoid/ci-cd-homework.'
+                bat 'docker build -t racozoid/ci-cd-homework:latest .'
             }
         }
     }
